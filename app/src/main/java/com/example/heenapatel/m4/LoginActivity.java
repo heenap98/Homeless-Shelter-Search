@@ -10,11 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.util.Log;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField;
     private EditText passField;
+    private TextView invalidText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         emailField = (EditText)findViewById(R.id.editText);
         passField = (EditText)findViewById(R.id.editText2);
+        invalidText = (TextView)findViewById(R.id.textView);
         Button login = (Button)findViewById(R.id.button4);
 
 //        login.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 //                Log.d("myTag", "reached inside the ifs");
             startActivity(new Intent(this, MainActivity.class));
         } else {
-            
+            invalidText.setVisibility(View.VISIBLE);
         }
     }
 
