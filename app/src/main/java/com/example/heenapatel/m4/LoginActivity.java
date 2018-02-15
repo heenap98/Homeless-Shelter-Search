@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
 //        Log.d("myTag", passField.getText().toString());
 
 
-        if(emailField.getText().toString().equals("User")
-            && passField.getText().toString().equals("Pass")) {
+        if(emailField.getText().toString().equals("user")
+            && passField.getText().toString().equals("pass")) {
 //                Log.d("myTag", "reached inside the ifs");
             startActivity(new Intent(this, MainActivity.class));
         } else {
