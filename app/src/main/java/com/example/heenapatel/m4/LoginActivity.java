@@ -28,6 +28,12 @@ public class LoginActivity extends AppCompatActivity {
         passField = (EditText)findViewById(R.id.editText2);
         invalidText = (TextView)findViewById(R.id.textView);
         Button login = (Button)findViewById(R.id.button4);
+        Button cancel = (Button) findViewById(R.id.cancelButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 //        login.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
