@@ -43,14 +43,31 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logIn(View v) {
-//        Log.d("myTag", "outside");
-//        Log.d("myTag", String.valueOf(emailField.getText().toString().equals("User")));
-//        Log.d("myTag", passField.getText().toString());
+//        if(emailField.getText().toString().equals("user")
+//            && passField.getText().toString().equals("pass")) {
+//            startActivity(new Intent(this, MainActivity.class));
+//        } else {
+//            invalidText.setVisibility(View.VISIBLE);
+//        }
 
+        if (Credentials.user_credentials.size() != 0) {
+            System.out.println((Credentials.user_credentials.get(0))[0]);
+        } else {
+            System.out.println("SKIP");
+        }
 
-        if(emailField.getText().toString().equals("user")
-            && passField.getText().toString().equals("pass")) {
-//                Log.d("myTag", "reached inside the ifs");
+        String[] current_user = new String[2];
+        current_user[0] = emailField.getText().toString();
+        current_user[1] = passField.getText().toString();
+        boolean registeredUser = false;
+        for (int i = 0; i < Credentials.user_credentials.size(); i++) {
+            if (current_user[0].equals((Credentials.user_credentials.get(i))[0])
+                    && current_user[1].equals((Credentials.user_credentials.get(i))[1])) {
+                registeredUser = true;
+                break;
+            }
+        }
+        if (registeredUser) {
             startActivity(new Intent(this, MainActivity.class));
         } else {
             invalidText.setVisibility(View.VISIBLE);

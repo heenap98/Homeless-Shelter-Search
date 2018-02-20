@@ -39,6 +39,10 @@
             android:label="Register"
             android:theme="@style/AppTheme.NoActionBar"
             android.parentActivityName=".WelcomeScreen"></activity>
+        <activity
+            android:name=".Credentials"
+            android:label="Credentials"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
