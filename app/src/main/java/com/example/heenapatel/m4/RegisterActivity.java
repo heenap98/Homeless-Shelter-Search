@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import java.util.ArrayList;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 /**
  * Created by heenapatel on 2/17/18.
@@ -17,6 +18,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected EditText name;
     protected EditText username;
     private EditText password;
+    private RadioButton user;
+    private RadioButton admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
