@@ -43,19 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logIn(View v) {
-//        if(emailField.getText().toString().equals("user")
-//            && passField.getText().toString().equals("pass")) {
-//            startActivity(new Intent(this, MainActivity.class));
-//        } else {
-//            invalidText.setVisibility(View.VISIBLE);
-//        }
-
-        if (Credentials.user_credentials.size() != 0) {
-            System.out.println((Credentials.user_credentials.get(0))[0]);
-        } else {
-            System.out.println("SKIP");
-        }
-
         String[] current_user = new String[2];
         current_user[0] = emailField.getText().toString();
         current_user[1] = passField.getText().toString();
@@ -73,7 +60,5 @@ public class LoginActivity extends AppCompatActivity {
             invalidText.setVisibility(View.VISIBLE);
         }
     }
-
-
 
 }
