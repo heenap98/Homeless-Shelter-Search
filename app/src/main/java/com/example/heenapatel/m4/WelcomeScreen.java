@@ -15,6 +15,7 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
         Button login = (Button)findViewById(R.id.button);
         Button register = (Button)findViewById(R.id.button2);
+        Button guest = (Button)findViewById(R.id.button3);
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -28,5 +29,14 @@ public class WelcomeScreen extends AppCompatActivity {
                 startActivity(new Intent(WelcomeScreen.this, RegisterActivity.class));
             }
         });
+
+
+        guest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeScreen.this, ShelterDetails.class));
+            }
+        });
+
+
     }
 }

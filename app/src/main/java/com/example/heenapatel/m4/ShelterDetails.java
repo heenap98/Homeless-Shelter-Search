@@ -15,18 +15,20 @@ import android.widget.Button;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
 import java.util.List;
 
 public class ShelterDetails extends AppCompatActivity {
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelterdetails);
-////        List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
-//        System.out.println();
+        
+
 
 
     }
