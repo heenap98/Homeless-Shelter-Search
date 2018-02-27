@@ -14,6 +14,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField;
@@ -22,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         emailField = (EditText)findViewById(R.id.editText);
@@ -35,14 +43,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        login.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            }
-//        });
     }
 
     public void logIn(View v) {
+
+        if (Credentials.user_credentials.size() != 0) {
+            System.out.println((Credentials.user_credentials.get(0))[0]);
+        } else {
+            System.out.println("SKIP");
+        }
+
         String[] current_user = new String[2];
         current_user[0] = emailField.getText().toString();
         current_user[1] = passField.getText().toString();
@@ -55,10 +65,50 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         if (registeredUser) {
+            readSDFile();
             startActivity(new Intent(this, MainActivity.class));
         } else {
             invalidText.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void readSDFile() {
+        SimpleModel model = SimpleModel.INSTANCE;
+
+        try {
+            //Open a stream on the raw file
+            InputStream is = getResources().openRawResource(R.raw.homeless_shelter_database);
+            //From here we probably should call a model method and pass the InputStream
+            //Wrap it in a BufferedReader so that we get the readLine() method
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+            String line;
+            br.readLine(); //get rid of header line
+
+            int count = 0;
+
+            while ((line = br.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+                    if (line.charAt(i) == ',' && count % 2 == 0) {
+                        line = line.substring(0, i) + ";" + line.substring(i + 1);
+                    }
+                    if (line.charAt(i) == '\"') {
+                        count++;
+                    }
+                }
+
+                String[] tokens = line.split(";");
+
+                int key = Integer.parseInt(tokens[0]);
+                double longitude = Double.parseDouble(tokens[4]);
+                double latitude = Double.parseDouble(tokens[5]);
+                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8]));
+            }
+
+            br.close();
+        } catch (IOException e) {
+        }
+
     }
 
 }

@@ -2,21 +2,36 @@ package com.example.heenapatel.m4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.support.v7.widget.LinearLayoutManager;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
         setSupportActionBar(toolbar);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        assert recyclerView != null;
+        setupRecyclerView(recyclerView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,8 +50,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        recyclerView.setAdapter(new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems()));
+    }
 
+    public class DataItemRecyclerViewAdapter extends RecyclerView.Adapter<DataItemRecyclerViewAdapter.DataItemListViewHolder> {
 
+        private final List<DataItem> mValues;
 
+        public DataItemRecyclerViewAdapter(List<DataItem> items) {
+            mValues = items;
+        }
+
+        @Override
+        public DataItemListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.dataitem_list_content, parent, false);
+            return new DataItemListViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final DataItemListViewHolder holder, int position) {
+            holder.name.setText(mValues.get(position).getName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class DataItemListViewHolder extends RecyclerView.ViewHolder {
+            TextView name;
+
+            DataItemListViewHolder(View itemView) {
+                super(itemView);
+                name = (TextView) itemView.findViewById(R.id.dataitem_row_textView);
+            }
+        }
+
+    }
 
 }
