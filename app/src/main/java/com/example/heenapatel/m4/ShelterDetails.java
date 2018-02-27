@@ -25,8 +25,8 @@ public class ShelterDetails extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelterdetails);
-        List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
-        System.out.println(shelterHolder.get(0));
+////        List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
+//        System.out.println();
 
 
     }
