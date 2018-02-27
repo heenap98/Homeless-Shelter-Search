@@ -5,17 +5,18 @@ package com.example.heenapatel.m4;
  */
 
 public class DataItem {
+
     private int key;
     private String name;
     private String capacity;
     private String restrictions;
-    private int longitude;
-    private int latitude;
+    private double longitude;
+    private double latitude;
     private String address;
     private String special_notes;
     private String phone_number;
 
-    public DataItem(int k, String n, String c, String r, int longit, int lat, String a, String sn, String pn) {
+    public DataItem(int k, String n, String c, String r, double longit, double lat, String a, String sn, String pn) {
         key = k;
         name = n;
         capacity = c;
@@ -47,11 +48,11 @@ public class DataItem {
         return restrictions;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
