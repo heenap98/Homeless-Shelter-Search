@@ -8,20 +8,21 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
         setSupportActionBar(toolbar);
+        if (count == 0) {
+            readSDFile();
+            count++;
+        }
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerView);
         assert recyclerView != null;
@@ -80,13 +85,10 @@ public class MainActivity extends AppCompatActivity {
             return new DataItemListViewHolder(view);
         }
 
-
         @Override
         public void onBindViewHolder(final DataItemListViewHolder holder, int position) {
             holder.name.setText(mValues.get(position).getName());
         }
-
-
 
         @Override
         public int getItemCount() {
@@ -120,18 +122,47 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+            }
+        }
+    }
 
+    private void readSDFile() {
+        SimpleModel model = SimpleModel.INSTANCE;
+
+        try {
+            //Open a stream on the raw file
+            InputStream is = getResources().openRawResource(R.raw.homeless_shelter_database);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+            String line;
+            br.readLine(); //get rid of header line
+
+            int count = 0;
+
+            while ((line = br.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+                    if (line.charAt(i) == ',' && count % 2 == 0) {
+                        line = line.substring(0, i) + ";" + line.substring(i + 1);
+                    }
+                    if (line.charAt(i) == '\"') {
+                        count++;
+                    }
+                }
+
+                String[] tokens = line.split(";");
+
+                int key = Integer.parseInt(tokens[0]);
+                double longitude = Double.parseDouble(tokens[4]);
+                double latitude = Double.parseDouble(tokens[5]);
+                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8]));
             }
 
-
-
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
-
-
-        }
-
-
-
     }
+}
 
 

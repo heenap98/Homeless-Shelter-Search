@@ -1,25 +1,12 @@
 package com.example.heenapatel.m4;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.util.Log;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,50 +52,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         if (registeredUser) {
-            readSDFile();
             startActivity(new Intent(this, MainActivity.class));
         } else {
             invalidText.setVisibility(View.VISIBLE);
         }
     }
-
-    private void readSDFile() {
-        SimpleModel model = SimpleModel.INSTANCE;
-
-        try {
-            //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.homeless_shelter_database);
-            //From here we probably should call a model method and pass the InputStream
-            //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-
-            String line;
-            br.readLine(); //get rid of header line
-
-            int count = 0;
-
-            while ((line = br.readLine()) != null) {
-                for (int i = 0; i < line.length(); i++) {
-                    if (line.charAt(i) == ',' && count % 2 == 0) {
-                        line = line.substring(0, i) + ";" + line.substring(i + 1);
-                    }
-                    if (line.charAt(i) == '\"') {
-                        count++;
-                    }
-                }
-
-                String[] tokens = line.split(";");
-
-                int key = Integer.parseInt(tokens[0]);
-                double longitude = Double.parseDouble(tokens[4]);
-                double latitude = Double.parseDouble(tokens[5]);
-                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8]));
-            }
-
-            br.close();
-        } catch (IOException e) {
-        }
-
-    }
-
 }
