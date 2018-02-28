@@ -8,12 +8,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -103,11 +105,17 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v)
                         {
                             Intent intent = new Intent(MainActivity.this, ShelterDetails.class);
-                            intent.putExtra("shelterName", mValues.get(2).getName());
-                            //here, I hardcoded the mValues.get2.getname, but what you need to do
-                            //is search for whichever shelter they tap, search in the list mvalues
-                            //then once you find it, just do the .getName and get address and
-                            //whatever else there is.
+                            String selected = name.getText().toString();
+                            int which = 0;
+                            for(int i=0; i<mValues.size(); i++) {
+                                if (mValues.get(i).getName().equalsIgnoreCase(selected)) {
+                                    which = i;
+                                    continue;
+                                }
+                            }
+                            intent.putExtra("shelterName", mValues.get(which).getName());
+                            intent.putExtra("Address", mValues.get(which).getAddress());
+                            intent.putExtra("Capacity", mValues.get(which).getCapacity());
                             startActivity(intent);
 
                         }
