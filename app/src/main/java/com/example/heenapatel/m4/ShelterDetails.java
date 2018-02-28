@@ -16,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -27,9 +26,10 @@ public class ShelterDetails extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelterdetails);
-        
-
-
+        String s = getIntent().getStringExtra("shelterName");
+        TextView shelterInfo = (TextView) findViewById(R.id.shelterText);
+        List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
+        shelterInfo.setText(s + "testing");
 
     }
 

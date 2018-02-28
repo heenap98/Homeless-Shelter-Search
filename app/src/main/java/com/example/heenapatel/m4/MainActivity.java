@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Button logOut = (Button)findViewById(R.id.logOutButton);
         setSupportActionBar(toolbar);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = findViewById(R.id.recyclerView);
         assert recyclerView != null;
         setupRecyclerView(recyclerView);
 
@@ -47,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, WelcomeScreen.class));
             }
         });
+
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.getContext().startActivity(new Intent(recyclerView.getContext(), ShelterDetails.class));
+            }
+        });
+
 
     }
 
@@ -69,10 +78,13 @@ public class MainActivity extends AppCompatActivity {
             return new DataItemListViewHolder(view);
         }
 
+
         @Override
         public void onBindViewHolder(final DataItemListViewHolder holder, int position) {
             holder.name.setText(mValues.get(position).getName());
         }
+
+
 
         @Override
         public int getItemCount() {
@@ -85,9 +97,33 @@ public class MainActivity extends AppCompatActivity {
             DataItemListViewHolder(View itemView) {
                 super(itemView);
                 name = (TextView) itemView.findViewById(R.id.dataitem_row_textView);
+
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            Intent intent = new Intent(MainActivity.this, ShelterDetails.class);
+                            intent.putExtra("shelterName", mValues.get(2).getName());
+                            //here, I hardcoded the mValues.get2.getname, but what you need to do
+                            //is search for whichever shelter they tap, search in the list mvalues
+                            //then once you find it, just do the .getName and get address and
+                            //whatever else there is.
+                            startActivity(intent);
+
+                        }
+                    });
+
             }
+
+
+
         }
+
+
+        }
+
+
 
     }
 
-}
+
