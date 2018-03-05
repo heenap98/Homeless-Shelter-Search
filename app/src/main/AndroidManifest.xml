@@ -40,6 +40,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android.parentActivityName=".WelcomeScreen"></activity>
         <activity
+            android:name=".SearchActivity"
+            android:label="SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Credentials"
             android:label="Credentials"
             android:theme="@style/AppTheme.NoActionBar"></activity>
