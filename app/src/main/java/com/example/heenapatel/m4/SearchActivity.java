@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 
 /**
  * Created by heenapatel on 3/5/18.
@@ -20,8 +22,10 @@ public class SearchActivity extends AppCompatActivity {
 
     private RadioButton maleRadio;
     private RadioButton femaleRadio;
+    private TextView nameText;
+    private Button searchButton;
     String genderInfo;
-
+    String shelterName;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class SearchActivity extends AppCompatActivity {
         RadioGroup radioGenderGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
         RadioButton male = (RadioButton) findViewById(R.id.maleRadio);
         RadioButton female = (RadioButton) findViewById(R.id.femaleRadio);
+        TextView name = (TextView) findViewById(R.id.nameText);
+        Button search = (Button) findViewById(R.id.searchButton);
 
         male.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -46,7 +52,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
+        search.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TextView name = (TextView) findViewById(R.id.nameText);
+                shelterName = name.getText().toString();
+            }
+        });
 
 
     }
