@@ -33,7 +33,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         guest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeScreen.this, ShelterDetails.class));
+                startActivity(new Intent(WelcomeScreen.this, SearchActivity.class));
             }
         });
 
