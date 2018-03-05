@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -27,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        readSDFile();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
+        Button search = (Button) findViewById(R.id.searchButton);
         setSupportActionBar(toolbar);
         if (count == 0) {
             readSDFile();
@@ -63,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        search.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+            }
+        });
 
     }
 
@@ -132,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
         try {
             //Open a stream on the raw file
             InputStream is = getResources().openRawResource(R.raw.homeless_shelter_database);
+
+            //From here we probably should call a model method and pass the InputStream
+            //Wrap it in a BufferedReader so that we get the readLine() method
 
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
