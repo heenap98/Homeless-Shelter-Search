@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                             || items.get(i).getName().toLowerCase().contains(shelterNameSearch.toLowerCase())) {
 
 
-                        if (items.get(i).getAgeGroup().equals(ageGroup)) {
+                        if (items.get(i).getAgeGroup().equals(ageGroup) || (ageGroup.equals(AgeGroup.Anyone))) {
                             mValues.add(items.get(i));
                         }
                     }

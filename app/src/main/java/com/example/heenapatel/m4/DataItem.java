@@ -32,54 +32,20 @@ public class DataItem {
         isMaleFriendly = true;
         isFemaleFriendly = true;
         ageGroup = AgeGroup.Anyone;
-    }
-
-    public DataItem(int k, String n, String c, String r, double longit, double lat, String a,
-                    String sn, String pn, boolean m, boolean f) {
-        key = k;
-        name = n;
-        capacity = c;
-        restrictions = r;
-        longitude = longit;
-        latitude = lat;
-        address = a;
-        special_notes = sn;
-        phone_number = pn;
-        isMaleFriendly = m;
-        isFemaleFriendly = f;
-        ageGroup = AgeGroup.Anyone;
-    }
-
-    public DataItem(int k, String n, String c, String r, double longit, double lat, String a,
-                    String sn, String pn, AgeGroup ag) {
-        key = k;
-        name = n;
-        capacity = c;
-        restrictions = r;
-        longitude = longit;
-        latitude = lat;
-        address = a;
-        special_notes = sn;
-        phone_number = pn;
-        isMaleFriendly = true;
-        isFemaleFriendly = true;
-        ageGroup = ag;
-    }
-
-    public DataItem(int k, String n, String c, String r, double longit, double lat, String a, String sn,
-                    String pn, boolean m, boolean f, AgeGroup ag) {
-        key = k;
-        name = n;
-        capacity = c;
-        restrictions = r;
-        longitude = longit;
-        latitude = lat;
-        address = a;
-        special_notes = sn;
-        phone_number = pn;
-        isMaleFriendly = m;
-        isFemaleFriendly = f;
-        ageGroup = ag;
+        if (r.contains("Men")) {
+            isFemaleFriendly = false;
+        } else if (r.contains("Women")) {
+            isMaleFriendly = false;
+        }
+        if (r.toLowerCase().contains("newborn")) {
+            ageGroup = AgeGroup.Newborns;
+        }
+        if (r.toLowerCase().contains("children")) {
+            ageGroup = AgeGroup.Children;
+        }
+        if (r.toLowerCase().contains("young adult")) {
+            ageGroup = AgeGroup.YoungAdults;
+        }
     }
 
     public String toString() {
