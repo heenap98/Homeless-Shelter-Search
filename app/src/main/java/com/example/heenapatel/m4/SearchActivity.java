@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        String[] agegroups = {"Families with newborns", "Children", "Young Adults", "Anyone"};
+        String[] agegroups = {"Anyone", "Families with newborns", "Children", "Young Adults"};
 
         RadioGroup radioGenderGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
         RadioButton male = (RadioButton) findViewById(R.id.maleRadio);
