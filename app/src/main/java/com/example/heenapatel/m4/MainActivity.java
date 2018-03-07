@@ -1,5 +1,7 @@
 package com.example.heenapatel.m4;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,9 +10,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.TextView;
 import java.io.BufferedReader;
@@ -24,11 +28,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static int count = 0;
+    public DataItemRecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        readSDFile();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
@@ -40,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        assert recyclerView != null;
-        setupRecyclerView(recyclerView);
+        adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
+
+        resetRecycleView(recyclerView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,12 +84,48 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems()));
     }
 
+    private void resetRecycleView(@NonNull RecyclerView recyclerView) {
+        Log.i("fuck this", ("" + SimpleModel.INSTANCE.getItems().size()));
+        recyclerView.setAdapter(adapter);
+    }
+
     public class DataItemRecyclerViewAdapter extends RecyclerView.Adapter<DataItemRecyclerViewAdapter.DataItemListViewHolder> {
 
         private final List<DataItem> mValues;
 
+//        public DataItemRecyclerViewAdapter(List<DataItem> items) {
+//            mValues = items;
+//        }
+
         public DataItemRecyclerViewAdapter(List<DataItem> items) {
-            mValues = items;
+            mValues = new ArrayList<>();
+            String genderInfo = getIntent().getStringExtra("genderInfo");
+            String shelterNameSearch = getIntent().getStringExtra("shelterName");
+
+            int ageGroupIndex = 3;
+            if (getIntent().getStringExtra("AgeGroup") != null) {
+                ageGroupIndex = Integer.parseInt(getIntent().getStringExtra("AgeGroup"));
+            }
+
+            AgeGroup ageGroup = AgeGroup.values()[ageGroupIndex];
+            for (int i = 0; i < items.size(); i++) {
+                if ((genderInfo == null
+                        || (genderInfo.equalsIgnoreCase("Male") && items.get(i).getMaleFriendly())
+                        || genderInfo.equalsIgnoreCase("Female") && items.get(i).getFemaleFriendly())) {
+
+                    if (shelterNameSearch == null
+                            || items.get(i).getName().toLowerCase().contains(shelterNameSearch.toLowerCase())) {
+
+
+                        if (items.get(i).getAgeGroup().equals(ageGroup)) {
+                            mValues.add(items.get(i));
+                        }
+                    }
+                }
+            }
+
+
+
         }
 
         @Override
@@ -118,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, ShelterDetails.class);
                             String selected = name.getText().toString();
                             int which = 0;
-                            for(int i=0; i<mValues.size(); i++) {
+                            for(int i = 0; i<mValues.size(); i++) {
                                 if (mValues.get(i).getName().equalsIgnoreCase(selected)) {
                                     which = i;
                                     continue;
@@ -127,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("shelterName", mValues.get(which).getName());
                             intent.putExtra("Address", mValues.get(which).getAddress());
                             intent.putExtra("Capacity", mValues.get(which).getCapacity());
+                            intent.putExtra("Maleok", mValues.get(which).getMaleFriendly());
+                            intent.putExtra("Femaleok", mValues.get(which).getFemaleFriendly());
                             startActivity(intent);
 
                         }

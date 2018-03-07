@@ -29,9 +29,11 @@ public class ShelterDetails extends AppCompatActivity {
         String s = getIntent().getStringExtra("shelterName");
         String s1 = getIntent().getStringExtra("Address");
         String s2 = getIntent().getStringExtra("Capacity");
+        boolean s3 = getIntent().getBooleanExtra("Maleok", false);
+        boolean s4 = getIntent().getBooleanExtra("Femaleok", false);
         TextView shelterInfo = (TextView) findViewById(R.id.shelterText);
         List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
-        shelterInfo.setText(s + "\n Address: " + s1+ "\n Capacity: " + s2);
+        shelterInfo.setText(s + "\n Address: " + s1 + "\n Capacity: " + s2+ "\n Male: " + s3+ "\n Female: " + s4);
 
     }
 
