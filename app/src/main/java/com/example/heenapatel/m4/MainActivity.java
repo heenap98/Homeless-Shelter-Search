@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             String genderInfo = getIntent().getStringExtra("genderInfo");
             String shelterNameSearch = getIntent().getStringExtra("shelterName");
 
-            int ageGroupIndex = 3;
+            int ageGroupIndex = 0;
             if (getIntent().getStringExtra("AgeGroup") != null) {
                 ageGroupIndex = Integer.parseInt(getIntent().getStringExtra("AgeGroup"));
             }
