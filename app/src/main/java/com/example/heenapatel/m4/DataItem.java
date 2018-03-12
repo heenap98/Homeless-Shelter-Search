@@ -8,29 +8,29 @@ public class DataItem {
 
     private int key;
     private String name;
-    private String capacity;
+    private String[] capacityDescriptions;
     private String restrictions;
     private double longitude;
     private double latitude;
     private String address;
     private String special_notes;
     private String phone_number;
-    private int reservationLimit;
+    private int[] intCapacity;
     private boolean isMaleFriendly;
     private boolean isFemaleFriendly;
     private AgeGroup ageGroup;
 
-    public DataItem(int k, String n, String c, String r, double longit, double lat, String a, String sn, String pn, int rl) {
+    public DataItem(int k, String n, String[] capDescription, String r, double longit, double lat, String a, String sn, String pn, int[] cap) {
         key = k;
         name = n;
-        capacity = c;
+        capacityDescriptions = capDescription;
         restrictions = r;
         longitude = longit;
         latitude = lat;
         address = a;
         special_notes = sn;
         phone_number = pn;
-        reservationLimit = rl;
+        intCapacity = cap;
         isMaleFriendly = true;
         isFemaleFriendly = true;
         ageGroup = AgeGroup.Anyone;
@@ -50,6 +50,10 @@ public class DataItem {
         }
     }
 
+    public DataItem(int k, String n, String r, double longit, double lat, String a, String sn, String pn) {
+        this(k, n, null, r, longit, lat, a, sn, pn, null);
+    }
+
     public String toString() {
         return name;
     }
@@ -63,7 +67,11 @@ public class DataItem {
     }
 
     public String getCapacity() {
-        return capacity;
+        String fullCapacity = "";
+        for (int i = 0; i < intCapacity.length; i++) {
+            fullCapacity += Integer.toString(intCapacity[i]) + capacityDescriptions[i] + '\n';
+        }
+        return fullCapacity;
     }
 
     public String getRestrictions() {
@@ -90,8 +98,6 @@ public class DataItem {
         return phone_number;
     }
 
-    public int getReservationLimit() {return reservationLimit; }
-
     public boolean getMaleFriendly() {
         return isMaleFriendly;
     }
@@ -103,4 +109,6 @@ public class DataItem {
     public AgeGroup getAgeGroup() {
         return ageGroup;
     }
+
+    public int[] getIntCapacity() { return intCapacity; }
 }

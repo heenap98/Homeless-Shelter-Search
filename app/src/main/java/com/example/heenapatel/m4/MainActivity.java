@@ -194,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
             br.readLine(); //get rid of header line
 
             int count = 0;
-            int reservationLimit;
 
             while ((line = br.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
@@ -208,17 +207,56 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] tokens = line.split(";");
 
-                if (tokens[2].contains("Famil") || tokens[2].contains("famil") || tokens[2].contains("apartment")
-                        || tokens[2].contains("Apartment") || tokens[2].contains("Room") || tokens[2].contains("room")) {
-                    reservationLimit = 1;
-                } else {
-                    reservationLimit = 4;
+                for (int i = 0; i < tokens.length; i++) {
+                    System.out.println(tokens[i]);
+                }
+
+//                if (tokens[2].contains("Famil") || tokens[2].contains("famil") || tokens[2].contains("apartment")
+//                        || tokens[2].contains("Apartment") || tokens[2].contains("Room") || tokens[2].contains("room")) {
+//                    reservationLimit = 1;
+//                } else {
+//                    reservationLimit = 4;
+//                }
+
+                String[] test = tokens[2].split(",");
+
+                String tempIntCapacity;
+                String capacityDescription;
+                int[] capacities = new int[test.length];
+                String[] capacityDescriptions = new String[test.length];
+
+                for (int i = 0; i < test.length; i++) {
+                    //EACH CAPACTIY
+                    tempIntCapacity = "";
+                    capacityDescription = "";
+
+                    for (int j = 0; j < test[i].length(); j++) {
+                        //EACH CHARACTER
+                        if (test[i].charAt(j) >= '0' && test[i].charAt(j) <= '9') {
+                            tempIntCapacity += test[i].charAt(j);
+                        } else if (test[i].charAt(j) != '"') {
+                            capacityDescription += test[i].charAt(j);
+                        }
+                    }
+
+                    if (!tempIntCapacity.equals("")) {
+                        int intCapacity = Integer.parseInt(tempIntCapacity);
+                        capacities[i] = intCapacity;
+                        capacityDescriptions[i] = capacityDescription;
+                    }
+
+
                 }
 
                 int key = Integer.parseInt(tokens[0]);
                 double longitude = Double.parseDouble(tokens[4]);
                 double latitude = Double.parseDouble(tokens[5]);
-                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8], reservationLimit));
+
+                if (capacities.length != 0) {
+                    model.addItem(new DataItem(key, tokens[1], capacityDescriptions, tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8], capacities));
+                } else {
+                    model.addItem(new DataItem(key, tokens[1], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8]));
+                }
             }
 
             br.close();
