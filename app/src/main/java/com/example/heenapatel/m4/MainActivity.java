@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             br.readLine(); //get rid of header line
 
             int count = 0;
+            int reservationLimit;
 
             while ((line = br.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
@@ -207,10 +208,17 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] tokens = line.split(";");
 
+                if (tokens[2].contains("Famil") || tokens[2].contains("famil") || tokens[2].contains("apartment")
+                        || tokens[2].contains("Apartment") || tokens[2].contains("Room") || tokens[2].contains("room")) {
+                    reservationLimit = 1;
+                } else {
+                    reservationLimit = 4;
+                }
+
                 int key = Integer.parseInt(tokens[0]);
                 double longitude = Double.parseDouble(tokens[4]);
                 double latitude = Double.parseDouble(tokens[5]);
-                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8]));
+                model.addItem(new DataItem(key, tokens[1], tokens[2], tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8], reservationLimit));
             }
 
             br.close();

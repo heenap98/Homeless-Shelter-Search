@@ -15,11 +15,12 @@ public class DataItem {
     private String address;
     private String special_notes;
     private String phone_number;
+    private int reservationLimit;
     private boolean isMaleFriendly;
     private boolean isFemaleFriendly;
     private AgeGroup ageGroup;
 
-    public DataItem(int k, String n, String c, String r, double longit, double lat, String a, String sn, String pn) {
+    public DataItem(int k, String n, String c, String r, double longit, double lat, String a, String sn, String pn, int rl) {
         key = k;
         name = n;
         capacity = c;
@@ -29,6 +30,7 @@ public class DataItem {
         address = a;
         special_notes = sn;
         phone_number = pn;
+        reservationLimit = rl;
         isMaleFriendly = true;
         isFemaleFriendly = true;
         ageGroup = AgeGroup.Anyone;
@@ -87,6 +89,8 @@ public class DataItem {
     public String getPhone_number() {
         return phone_number;
     }
+
+    public int getReservationLimit() {return reservationLimit; }
 
     public boolean getMaleFriendly() {
         return isMaleFriendly;
