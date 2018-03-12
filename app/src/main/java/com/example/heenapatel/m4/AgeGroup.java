@@ -5,5 +5,5 @@ package com.example.heenapatel.m4;
  */
 
 public enum AgeGroup {
-    Newborns, Children, YoungAdults, Anyone
+    Anyone, Newborns, Children, YoungAdults
 }

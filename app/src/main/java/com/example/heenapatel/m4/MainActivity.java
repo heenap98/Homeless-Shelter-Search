@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetRecycleView(@NonNull RecyclerView recyclerView) {
-        Log.i("fuck this", ("" + SimpleModel.INSTANCE.getItems().size()));
+        Log.i("frick this", ("" + SimpleModel.INSTANCE.getItems().size()));
         recyclerView.setAdapter(adapter);
     }
 
