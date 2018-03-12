@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, ShelterDetails.class);
                             String selected = name.getText().toString();
                             int which = 0;
-                            for(int i = 0; i<mValues.size(); i++) {
+                            for(int i = 0; i < mValues.size(); i++) {
                                 if (mValues.get(i).getName().equalsIgnoreCase(selected)) {
                                     which = i;
                                     continue;
