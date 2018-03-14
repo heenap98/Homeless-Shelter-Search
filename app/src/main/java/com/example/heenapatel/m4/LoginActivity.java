@@ -53,12 +53,5 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             }
         }
-        if (registeredUser) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
-        } else {
-            invalidText.setVisibility(View.VISIBLE);
-        }
     }
 }
