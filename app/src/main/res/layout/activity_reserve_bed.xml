@@ -6,7 +6,132 @@
     android:layout_height="match_parent"
     tools:context="com.example.heenapatel.m4.ReserveBedActivity">
 
+    <TextView
+        android:id="@+id/ReservationText"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:text="Reservation List"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <TextView
+        android:id="@+id/Family"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:text="Family"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="155dp" />
+
+    <RadioGroup
+        android:id="@+id/FamilyGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="155dp">
+
+        <RadioButton
+            android:id="@+id/FamilyZero"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/FamilyOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/Apartment"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:text="Apartment"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="255dp" />
+
+    <RadioGroup
+        android:id="@+id/ApartmentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="251dp">
+
+        <RadioButton
+            android:id="@+id/ApartZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/ApartOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/Roomtext"
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:text="Room"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="353dp" />
+
+    <RadioGroup
+        android:layout_width="110dp"
+        android:layout_height="160dp"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="353dp">
+
+        <RadioButton
+            android:id="@+id/RoomZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/RoomOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+        <RadioButton
+            android:id="@+id/RoomTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Two" />
+
+        <RadioButton
+            android:id="@+id/RoomThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Three" />
+
+        <RadioButton
+            android:id="@+id/RoomFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Four" />
+    </RadioGroup>
+
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
