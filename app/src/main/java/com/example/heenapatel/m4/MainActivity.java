@@ -29,7 +29,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static int count = 0;
     public DataItemRecyclerViewAdapter adapter;
-    public int userID = getIntent().getIntExtra("userID", 0);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

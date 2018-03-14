@@ -6,7 +6,161 @@
     android:layout_height="match_parent"
     tools:context="com.example.heenapatel.m4.ReserveBedActivity">
 
+    <TextView
+        android:id="@+id/ReservationText"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Reservation List"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/FamilyGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.727" />
+
+    <TextView
+        android:id="@+id/Family"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_marginBottom="36dp"
+        android:text="Family"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/Apartment"
+        tools:layout_editor_absoluteX="82dp" />
+
+    <RadioGroup
+        android:id="@+id/FamilyGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ApartmentGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.734">
+
+        <RadioButton
+            android:id="@+id/FamilyZero"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/FamilyOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/Apartment"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_marginBottom="52dp"
+        android:text="Apartment"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/Roomtext"
+        tools:layout_editor_absoluteX="82dp" />
+
+    <RadioGroup
+        android:id="@+id/ApartmentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/ApartZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/ApartOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/Roomtext"
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:layout_marginBottom="176dp"
+        android:text="Room"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="82dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="110dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/RoomZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zero" />
+
+        <RadioButton
+            android:id="@+id/RoomOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="One" />
+
+        <RadioButton
+            android:id="@+id/RoomTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Two" />
+
+        <RadioButton
+            android:id="@+id/RoomThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Three" />
+
+        <RadioButton
+            android:id="@+id/RoomFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Four" />
+    </RadioGroup>
+
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
