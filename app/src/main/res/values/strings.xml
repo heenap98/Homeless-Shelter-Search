@@ -15,4 +15,5 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_reserve_bed">ReserveBedActivity</string>
 </resources>

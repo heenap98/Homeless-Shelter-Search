@@ -33,24 +33,33 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
+            android.parentActivityName=".WelcomeScreen"
             android:label="Register"
-            android:theme="@style/AppTheme.NoActionBar"
-            android.parentActivityName=".WelcomeScreen"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SearchActivity"
             android:label="SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Credentials"
             android:label="Credentials"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShelterDetails"
             android:label="ShelterDetails"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReserveBedActivity"
+            android:label="@string/title_activity_reserve_bed"
+            android:parentActivityName=".ShelterDetails"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.heenapatel.m4.ShelterDetails" />
+        </activity>
     </application>
 
 </manifest>

@@ -8,4 +8,8 @@ import java.util.ArrayList;
 
 public class Credentials {
     public static ArrayList<String[]> user_credentials = new ArrayList<>();
+    public static ArrayList<Boolean> reserved_status = new ArrayList<>();
+    public static ArrayList<DataItem> reservation_location = new ArrayList<>();
+    public static ArrayList<Integer> num_reservations = new ArrayList<>();
+
 }

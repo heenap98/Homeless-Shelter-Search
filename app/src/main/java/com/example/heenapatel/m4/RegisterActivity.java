@@ -46,14 +46,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void registerUser(View v) {
+        int userID = 0; // determined by user_credentials.size() before adding new user, used to keep track of ArrayList positions
         if(name.getText().toString() != ""
                 && username.getText().toString() != ""
                 && password.getText().toString() != "") {
             String[] user = new String[2];
             user[0] = username.getText().toString();
             user[1] = password.getText().toString();
+            userID = Credentials.user_credentials.size();
             Credentials.user_credentials.add(user);
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            Credentials.reserved_status.add(false);
+            Credentials.reservation_location.add(null);
+            Credentials.num_reservations.add(0);
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         }
     }
 

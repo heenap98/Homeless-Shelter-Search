@@ -26,6 +26,8 @@ public class ShelterDetails extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelterdetails);
+        Button reserve = (Button) findViewById(R.id.reserveButton);
+        int userID = getIntent().getIntExtra("userID", 0);
         String s = getIntent().getStringExtra("shelterName");
         String s1 = getIntent().getStringExtra("Address");
         String s2 = getIntent().getStringExtra("Capacity");
@@ -34,7 +36,11 @@ public class ShelterDetails extends AppCompatActivity {
         TextView shelterInfo = (TextView) findViewById(R.id.shelterText);
         List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
         shelterInfo.setText(s + "\n Address: " + s1 + "\n Capacity: " + s2+ "\n Male: " + s3+ "\n Female: " + s4);
-
+        reserve.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(ShelterDetails.this, ReserveBedActivity.class));
+            }
+        });
     }
 
 

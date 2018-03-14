@@ -44,15 +44,19 @@ public class LoginActivity extends AppCompatActivity {
         current_user[0] = emailField.getText().toString();
         current_user[1] = passField.getText().toString();
         boolean registeredUser = false;
+        int userID = 0; // determined by i, used across all activities to keep track of which credentials to use
         for (int i = 0; i < Credentials.user_credentials.size(); i++) {
             if (current_user[0].equals((Credentials.user_credentials.get(i))[0])
                     && current_user[1].equals((Credentials.user_credentials.get(i))[1])) {
                 registeredUser = true;
+                userID = i;
                 break;
             }
         }
         if (registeredUser) {
-            startActivity(new Intent(this, MainActivity.class));
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         } else {
             invalidText.setVisibility(View.VISIBLE);
         }
