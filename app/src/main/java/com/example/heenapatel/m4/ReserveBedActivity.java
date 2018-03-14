@@ -9,13 +9,14 @@ import android.view.View;
 
 public class ReserveBedActivity extends AppCompatActivity {
 
-    public int userID = getIntent().getIntExtra("userID", 0);
+    public int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_bed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        userID = getIntent().getIntExtra("userID", 0);
     }
 
 }
