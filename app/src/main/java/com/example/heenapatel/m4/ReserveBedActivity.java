@@ -7,26 +7,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.Button;
-
-public class ReserveBedActivity extends AppCompatActivity {
-
-    public int userID = getIntent().getIntExtra("userID", 0);
-
-=======
 import android.widget.RadioButton;
-
 import java.security.PublicKey;
 
 public class ReserveBedActivity extends AppCompatActivity {
 
+    public int userID = getIntent().getIntExtra("userID", 0);
     public int familyNumber;
     public int apartmentNumber;
     public int roomNumber;
 
-    public int userID;
->>>>>>> 4cc87413169fc62d558ca06aa9bd4a4a7090e500
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
