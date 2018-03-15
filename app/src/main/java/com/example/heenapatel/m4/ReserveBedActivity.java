@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
+
 import java.security.PublicKey;
 
 public class ReserveBedActivity extends AppCompatActivity {
@@ -16,6 +18,9 @@ public class ReserveBedActivity extends AppCompatActivity {
     public int familyNumber;
     public int apartmentNumber;
     public int roomNumber;
+    public int familyAvailable;
+    public int apartmentAvailable;
+    public int roomAvailable;
 
 
     @Override
@@ -23,6 +28,7 @@ public class ReserveBedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_bed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView errorMsg = (TextView) findViewById(R.id.errorReserve);
         RadioButton Family_zero = (RadioButton) findViewById(R.id.FamilyZero);
         RadioButton Family_one = (RadioButton) findViewById(R.id.FamilyOne);
         RadioButton Apartment_zero = (RadioButton) findViewById(R.id.ApartZero);
@@ -96,11 +102,18 @@ public class ReserveBedActivity extends AppCompatActivity {
         });
 
 
+        if (familyNumber > 1 || familyNumber < 0 || familyNumber > familyAvailable
+                || apartmentNumber > 1 || apartmentNumber < 0 || apartmentNumber > apartmentAvailable
+                || roomNumber > 1 || roomNumber < 0 || roomNumber > roomAvailable) {
+            errorMsg.setText("There is an error with your given reservation. Ensure the capacity is available and " +
+                    "the number you have put is greater than or equal to 0.");
+        } else {
+            familyAvailable = familyAvailable - familyNumber;
+            apartmentAvailable = apartmentAvailable - apartmentNumber;
+            roomAvailable = roomAvailable - roomNumber;
 
-
-
+        }
     }
-
 
 
 }
