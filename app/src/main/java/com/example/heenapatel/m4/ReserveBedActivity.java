@@ -13,7 +13,6 @@ import java.security.PublicKey;
 
 public class ReserveBedActivity extends AppCompatActivity {
 
-    public int userID = getIntent().getIntExtra("userID", 0);
     public int familyNumber;
     public int apartmentNumber;
     public int roomNumber;
@@ -35,7 +34,7 @@ public class ReserveBedActivity extends AppCompatActivity {
         RadioButton Room_zero = (RadioButton) findViewById(R.id.RoomZero);
 
         setSupportActionBar(toolbar);
-        userID = getIntent().getIntExtra("userID", 0);
+        int userID = getIntent().getIntExtra("userID", 0);
 
         Family_zero.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

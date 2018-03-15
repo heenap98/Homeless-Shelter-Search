@@ -37,10 +37,7 @@ public class ShelterDetails extends AppCompatActivity {
         TextView shelterInfo = (TextView) findViewById(R.id.shelterText);
         List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
         shelterInfo.setText(s + "\n Address: " + s1 + "\n Capacity: " + s2 + "\n Male: " + s3 + "\n Female: " + s4);
-        if (Credentials.reserved_status.get(userID) == true) {
-            reserved = true;
-        }
-        if (reserved) {
+        if (Credentials.reserved_status.get(userID)) {
             reserve.setVisibility(View.INVISIBLE);
         } else {
             reserve.setVisibility(View.VISIBLE);
