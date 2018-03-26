@@ -67,10 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.heenapatel.m4.ShelterDetails" />
         </activity>
-        <activity
-            android:name=".MapActivity"
-            android:label="MapActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
