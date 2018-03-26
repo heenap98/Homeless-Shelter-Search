@@ -15,12 +15,13 @@ import java.security.PublicKey;
 
 public class ReserveBedActivity extends AppCompatActivity {
 
-    public int familyNumber;
-    public int apartmentNumber;
-    public int roomNumber;
+    public int familyNumber = 0;
+    public int apartmentNumber = 0;
+    public int roomNumber = 0;
     public int familyAvailable;
     public int apartmentAvailable;
     public int roomAvailable;
+    public int[] capacityArray;
     public String shelterName;
 
 
@@ -30,7 +31,8 @@ public class ReserveBedActivity extends AppCompatActivity {
         shelterName = getIntent().getStringExtra("shelterName");
         setContentView(R.layout.activity_reserve_bed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView errorMsg = (TextView) findViewById(R.id.errorReserve);
+        Button confirm = (Button) findViewById(R.id.confirmButton);
+        final TextView errorMsg = (TextView) findViewById(R.id.errorReserve);
         RadioButton Family_zero = (RadioButton) findViewById(R.id.FamilyZero);
         RadioButton Family_one = (RadioButton) findViewById(R.id.FamilyOne);
         RadioButton Apartment_zero = (RadioButton) findViewById(R.id.ApartZero);
@@ -41,12 +43,18 @@ public class ReserveBedActivity extends AppCompatActivity {
         RadioButton Room_four = (RadioButton) findViewById(R.id.RoomFour);
         RadioButton Room_zero = (RadioButton) findViewById(R.id.RoomZero);
 
+
         setSupportActionBar(toolbar);
         int userID = getIntent().getIntExtra("userID", 0);
+
+        roomAvailable = 2;
+        familyAvailable = 6;
+        apartmentAvailable = 4;
 
         Family_zero.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 familyNumber = 0;
+                errorMsg.setText("");
             }
         });
 
@@ -54,6 +62,11 @@ public class ReserveBedActivity extends AppCompatActivity {
         Family_one.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 familyNumber = 1;
+                if (familyNumber > familyAvailable) {
+                    errorMsg.setText("There aren't any family rooms available");
+                } else {
+                    errorMsg.setText("");
+                }
             }
         });
 
@@ -61,6 +74,7 @@ public class ReserveBedActivity extends AppCompatActivity {
         Apartment_zero.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 apartmentNumber = 0;
+                errorMsg.setText("");
             }
         });
 
@@ -68,6 +82,11 @@ public class ReserveBedActivity extends AppCompatActivity {
         Apartment_one.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 apartmentNumber = 1;
+                if (apartmentNumber > apartmentAvailable) {
+                    errorMsg.setText("There aren't any apartments available");
+                } else {
+                    errorMsg.setText("");
+                }
             }
         });
 
@@ -75,24 +94,41 @@ public class ReserveBedActivity extends AppCompatActivity {
         Room_zero.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 roomNumber = 0;
+                errorMsg.setText("");
             }
         });
 
         Room_one.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 roomNumber = 1;
+                if (roomNumber > roomAvailable) {
+                    errorMsg.setText("The rooms chosen is too high.");
+                } else {
+                    errorMsg.setText("");
+                }
+
             }
         });
 
         Room_two.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 roomNumber = 2;
+                if (roomNumber > roomAvailable) {
+                    errorMsg.setText("The rooms chosen is too high.");
+                } else {
+                    errorMsg.setText("");
+                }
             }
         });
 
         Room_three.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 roomNumber = 3;
+                if (roomNumber > roomAvailable) {
+                    errorMsg.setText("The rooms chosen is too high.");
+                } else {
+                    errorMsg.setText("");
+                }
             }
         });
 
@@ -100,21 +136,32 @@ public class ReserveBedActivity extends AppCompatActivity {
         Room_four.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 roomNumber = 4;
+                if (roomNumber > roomAvailable) {
+                    errorMsg.setText("The rooms chosen is too high.");
+                } else {
+                    errorMsg.setText("");
+                }
             }
         });
 
 
-        if (familyNumber > 1 || familyNumber < 0 || familyNumber > familyAvailable
-                || apartmentNumber > 1 || apartmentNumber < 0 || apartmentNumber > apartmentAvailable
-                || roomNumber > 1 || roomNumber < 0 || roomNumber > roomAvailable) {
-            errorMsg.setText("There is an error with your given reservation. Ensure the capacity is available and " +
-                    "the number you have put is greater than or equal to 0.");
-        } else {
-            familyAvailable = familyAvailable - familyNumber;
-            apartmentAvailable = apartmentAvailable - apartmentNumber;
-            roomAvailable = roomAvailable - roomNumber;
+        confirm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (familyNumber > familyAvailable || apartmentNumber > apartmentAvailable || roomNumber > roomAvailable) {
+                    errorMsg.setText("Enter valid values.");
+                } else {
+                    familyAvailable = familyAvailable - familyNumber;
+                    apartmentAvailable = apartmentAvailable - apartmentNumber;
+                    roomAvailable = roomAvailable - roomNumber;
+                    Intent newIntent = new Intent(ReserveBedActivity.this, ShelterDetails.class);
+                    startActivity(newIntent);
+                }
+            }
+        });
+
+
         }
     }
 
 
-}
+

@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             intent.putExtra("shelterName", mValues.get(which).getName());
                             intent.putExtra("Address", mValues.get(which).getAddress());
+                            intent.putExtra("capacityArray", mValues.get(which).getIntCapacity());
                             intent.putExtra("Capacity", mValues.get(which).getCapacity());
                             intent.putExtra("Maleok", mValues.get(which).getMaleFriendly());
                             intent.putExtra("Femaleok", mValues.get(which).getFemaleFriendly());

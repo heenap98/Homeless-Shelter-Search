@@ -31,6 +31,7 @@ public class ShelterDetails extends AppCompatActivity {
         final String s = getIntent().getStringExtra("shelterName");
         String s1 = getIntent().getStringExtra("Address");
         String s2 = getIntent().getStringExtra("Capacity");
+        final int[] capacityArray = getIntent().getIntArrayExtra("capacityArray");
         boolean s3 = getIntent().getBooleanExtra("Maleok", false);
         boolean s4 = getIntent().getBooleanExtra("Femaleok", false);
         boolean reserved = false;
@@ -46,6 +47,7 @@ public class ShelterDetails extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newIntent = new Intent(ShelterDetails.this, ReserveBedActivity.class);
                 newIntent.putExtra("shelterName", s);
+                newIntent.putExtra("capacityArray", capacityArray);
                 startActivity(newIntent);
             }
         });
