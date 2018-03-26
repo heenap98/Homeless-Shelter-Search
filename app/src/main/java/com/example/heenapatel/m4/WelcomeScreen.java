@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 public class WelcomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
         Button login = (Button)findViewById(R.id.button);
-        Button register = (Button)findViewById(R.id.button2);
+        Button register = (Button)findViewById(R.id.locationButton);
         Button guest = (Button)findViewById(R.id.button3);
 
         login.setOnClickListener(new View.OnClickListener() {

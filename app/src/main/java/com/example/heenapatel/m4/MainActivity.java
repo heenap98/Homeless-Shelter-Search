@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
         Button search = (Button) findViewById(R.id.searchButton);
+        Button map = (Button) findViewById(R.id.mapButton);)
         setSupportActionBar(toolbar);
         if (count == 0) {
             readSDFile();
@@ -75,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
+            }
+        });
+
+        map.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MapActivity.class));
             }
         });
 
