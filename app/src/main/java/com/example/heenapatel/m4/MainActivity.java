@@ -207,10 +207,6 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] tokens = line.split(";");
 
-                for (int i = 0; i < tokens.length; i++) {
-                    System.out.println(tokens[i]);
-                }
-
 //                if (tokens[2].contains("Famil") || tokens[2].contains("famil") || tokens[2].contains("apartment")
 //                        || tokens[2].contains("Apartment") || tokens[2].contains("Room") || tokens[2].contains("room")) {
 //                    reservationLimit = 1;
@@ -239,6 +235,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
+
+
                     if (!tempIntCapacity.equals("")) {
                         int intCapacity = Integer.parseInt(tempIntCapacity);
                         capacities[i] = intCapacity;
@@ -251,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 int key = Integer.parseInt(tokens[0]);
                 double longitude = Double.parseDouble(tokens[4]);
                 double latitude = Double.parseDouble(tokens[5]);
+
 
                 if (capacities.length != 0) {
                     model.addItem(new DataItem(key, tokens[1], capacityDescriptions, tokens[3], longitude, latitude, tokens[6], tokens[7], tokens[8], capacities));

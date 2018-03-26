@@ -21,11 +21,13 @@ public class ReserveBedActivity extends AppCompatActivity {
     public int familyAvailable;
     public int apartmentAvailable;
     public int roomAvailable;
+    public String shelterName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        shelterName = getIntent().getStringExtra("shelterName");
         setContentView(R.layout.activity_reserve_bed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView errorMsg = (TextView) findViewById(R.id.errorReserve);
@@ -111,7 +113,6 @@ public class ReserveBedActivity extends AppCompatActivity {
             familyAvailable = familyAvailable - familyNumber;
             apartmentAvailable = apartmentAvailable - apartmentNumber;
             roomAvailable = roomAvailable - roomNumber;
-
         }
     }
 

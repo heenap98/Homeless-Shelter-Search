@@ -28,7 +28,7 @@ public class ShelterDetails extends AppCompatActivity {
         setContentView(R.layout.activity_shelterdetails);
         Button reserve = (Button) findViewById(R.id.reserveButton);
         int userID = getIntent().getIntExtra("userID", 0);
-        String s = getIntent().getStringExtra("shelterName");
+        final String s = getIntent().getStringExtra("shelterName");
         String s1 = getIntent().getStringExtra("Address");
         String s2 = getIntent().getStringExtra("Capacity");
         boolean s3 = getIntent().getBooleanExtra("Maleok", false);
@@ -44,7 +44,9 @@ public class ShelterDetails extends AppCompatActivity {
         }
         reserve.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(ShelterDetails.this, ReserveBedActivity.class));
+                Intent newIntent = new Intent(ShelterDetails.this, ReserveBedActivity.class);
+                newIntent.putExtra("shelterName", s);
+                startActivity(newIntent);
             }
         });
     }

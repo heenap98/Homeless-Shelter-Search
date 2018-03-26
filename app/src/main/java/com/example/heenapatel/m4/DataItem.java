@@ -69,6 +69,7 @@ public class DataItem {
     public String getCapacity() {
         String fullCapacity = "";
         for (int i = 0; i < intCapacity.length; i++) {
+            System.out.println(capacityDescriptions[i]);
             fullCapacity += Integer.toString(intCapacity[i]) + capacityDescriptions[i] + '\n';
         }
         return fullCapacity;
