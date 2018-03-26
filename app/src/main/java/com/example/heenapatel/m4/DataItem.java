@@ -112,4 +112,6 @@ public class DataItem {
     }
 
     public int[] getIntCapacity() { return intCapacity; }
+
+    public void setIntCapacity(int[] cap) {intCapacity = cap;}
 }
