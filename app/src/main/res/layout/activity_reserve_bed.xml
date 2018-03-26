@@ -13,29 +13,32 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Reservation List"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/FamilyGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/Family"
         android:layout_width="wrap_content"
         android:layout_height="57dp"
         android:layout_marginBottom="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
         android:text="Family"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/Apartment"
-        tools:layout_editor_absoluteX="82dp" />
+        app:layout_constraintEnd_toStartOf="@+id/FamilyGroup"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/FamilyGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -45,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.675"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.734">
+        app:layout_constraintVertical_bias="0.793">
 
         <RadioButton
             android:id="@+id/FamilyZero"
@@ -67,22 +70,26 @@
         android:id="@+id/Apartment"
         android:layout_width="wrap_content"
         android:layout_height="57dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
         android:text="Apartment"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/Roomtext"
-        tools:layout_editor_absoluteX="82dp" />
+        app:layout_constraintEnd_toStartOf="@+id/ApartmentGroup"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/ApartmentGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
@@ -105,17 +112,21 @@
         android:id="@+id/Roomtext"
         android:layout_width="wrap_content"
         android:layout_height="67dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="184dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
         android:text="Room"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="82dp" />
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="110dp"
         android:layout_height="160dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="128dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -157,7 +168,39 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Four" />
+
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/errorReserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="Check available capacities."
+        android:textColor="#ff30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ReservationText"
+        app:layout_constraintVertical_bias="0.866" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/errorReserve" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

@@ -28,26 +28,27 @@ public class ShelterDetails extends AppCompatActivity {
         setContentView(R.layout.activity_shelterdetails);
         Button reserve = (Button) findViewById(R.id.reserveButton);
         int userID = getIntent().getIntExtra("userID", 0);
-        String s = getIntent().getStringExtra("shelterName");
+        final String s = getIntent().getStringExtra("shelterName");
         String s1 = getIntent().getStringExtra("Address");
         String s2 = getIntent().getStringExtra("Capacity");
+        final int[] capacityArray = getIntent().getIntArrayExtra("capacityArray");
         boolean s3 = getIntent().getBooleanExtra("Maleok", false);
         boolean s4 = getIntent().getBooleanExtra("Femaleok", false);
         boolean reserved = false;
         TextView shelterInfo = (TextView) findViewById(R.id.shelterText);
         List<DataItem> shelterHolder = SimpleModel.INSTANCE.getItems();
         shelterInfo.setText(s + "\n Address: " + s1 + "\n Capacity: " + s2 + "\n Male: " + s3 + "\n Female: " + s4);
-        if (Credentials.reserved_status.get(userID) == true) {
-            reserved = true;
-        }
-        if (reserved) {
+        if (Credentials.reserved_status.get(userID)) {
             reserve.setVisibility(View.INVISIBLE);
         } else {
             reserve.setVisibility(View.VISIBLE);
         }
         reserve.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(ShelterDetails.this, ReserveBedActivity.class));
+                Intent newIntent = new Intent(ShelterDetails.this, ReserveBedActivity.class);
+                newIntent.putExtra("shelterName", s);
+                newIntent.putExtra("capacityArray", capacityArray);
+                startActivity(newIntent);
             }
         });
     }
