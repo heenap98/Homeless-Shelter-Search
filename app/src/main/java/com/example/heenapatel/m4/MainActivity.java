@@ -81,7 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
         map.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
+                String genderInfo = getIntent().getStringExtra("genderInfo");
+                String shelterNameSearch = getIntent().getStringExtra("shelterName");
+
+                int ageGroupIndex = 0;
+                if (getIntent().getStringExtra("AgeGroup") != null) {
+                    ageGroupIndex = Integer.parseInt(getIntent().getStringExtra("AgeGroup"));
+                }
+
+                Intent newIntent = new Intent(MainActivity.this, MapsActivity.class);
+                newIntent.putExtra("genderInfo",genderInfo);
+                newIntent.putExtra("shelterNameSearch",shelterNameSearch);
+                newIntent.putExtra("ageGroupIndex",ageGroupIndex);
+
+                startActivity(newIntent);
             }
         });
 
