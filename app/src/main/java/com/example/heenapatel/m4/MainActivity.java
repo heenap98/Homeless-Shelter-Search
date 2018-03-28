@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public int apartmentTaken;
     public int roomTaken;
     public String shelterName;
+    public static SimpleModel model = SimpleModel.INSTANCE;
 
     public DataItemRecyclerViewAdapter adapter;
 
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readSDFile() {
-        SimpleModel model = SimpleModel.INSTANCE;
+        //SimpleModel model = SimpleModel.INSTANCE;
 
         try {
             //Open a stream on the raw file

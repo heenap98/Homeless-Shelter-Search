@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import java.util.List;
 
 import java.security.PublicKey;
 
@@ -24,6 +25,7 @@ public class ReserveBedActivity extends AppCompatActivity {
     public int roomAvailable;
     public String shelterName;
     public int[] capacityArray;
+    SimpleModel shelters = MainActivity.model;
 
 
     public static boolean reservationPlaced;
@@ -164,6 +166,19 @@ public class ReserveBedActivity extends AppCompatActivity {
                     familyAvailable = familyAvailable - familyNumber;
                     apartmentAvailable = apartmentAvailable - apartmentNumber;
                     roomAvailable = roomAvailable - roomNumber;
+                    int total = familyNumber + apartmentNumber + roomNumber;
+
+                    List<DataItem> sheltersList = MainActivity.model.getItems();
+                    for (int i = 0; i < sheltersList.size(); i++) {
+                        if (shelterName.equals(sheltersList.get(i).getName())) {
+                            int capacity = sheltersList.get(i).getIntCapacity()[0];
+                            capacity = capacity - total;
+                            int[] cap = new int[1];
+                            cap[0] = capacity;
+                            sheltersList.get(i).setIntCapacity(cap);
+                        }
+                    }
+
                     reservationPlaced = true;
                     Intent newIntent = new Intent(ReserveBedActivity.this, MainActivity.class);
                     newIntent.putExtra("reservationPlaced", reservationPlaced);
