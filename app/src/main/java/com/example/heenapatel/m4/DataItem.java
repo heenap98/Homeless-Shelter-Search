@@ -4,6 +4,8 @@ package com.example.heenapatel.m4;
  * Created by heenapatel on 2/26/18.
  */
 
+import android.util.Log;
+
 public class DataItem {
 
     private int key;
@@ -69,11 +71,19 @@ public class DataItem {
     public String getCapacity() {
         String fullCapacity = "";
         for (int i = 0; i < intCapacity.length; i++) {
-            System.out.println(capacityDescriptions[i]);
+           Log.d("cap", "" + capacityDescriptions[i]);
             fullCapacity += Integer.toString(intCapacity[i]) + capacityDescriptions[i] + '\n';
         }
         return fullCapacity;
     }
+
+
+    public String setCapacity(int sub) {
+        Log.d("why cant i read this", "qqq~~~~~~~");
+        intCapacity[0] -= sub;
+        return "" + intCapacity[0] + '\n';
+    }
+
 
     public String getRestrictions() {
         return restrictions;

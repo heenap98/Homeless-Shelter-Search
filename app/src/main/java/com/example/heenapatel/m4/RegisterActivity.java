@@ -3,10 +3,13 @@ package com.example.heenapatel.m4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import java.util.ArrayList;
 
 /**
  * Created by heenapatel on 2/17/18.
@@ -19,9 +22,11 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText password;
     private RadioButton user;
     private RadioButton admin;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db = new DatabaseHandler(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Button register = (Button) findViewById(R.id.registerButton);
@@ -58,6 +63,22 @@ public class RegisterActivity extends AppCompatActivity {
             Credentials.reserved_status.add(false);
             Credentials.reservation_location.add(null);
             Credentials.num_reservations.add(0);
+            User newUser = new User(userID, user[0], user[1], "");
+
+            db.insertUser(newUser);
+
+
+            if (db == null) {
+                Log.d("done", "goofed");
+            } else {
+                Log.d("hmmm", "hmmmm");
+
+//                ArrayList<User> users = (ArrayList<User>) db.getAllUsers();
+//                Log.d("size of user table", "y" + users.size());
+
+
+            }
+
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             intent.putExtra("userID", userID);
             startActivity(intent);

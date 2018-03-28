@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -21,13 +22,18 @@ public class ReserveBedActivity extends AppCompatActivity {
     public int familyAvailable;
     public int apartmentAvailable;
     public int roomAvailable;
-    public int[] capacityArray;
     public String shelterName;
+    public int[] capacityArray;
 
+
+    public static boolean reservationPlaced;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        reservationPlaced = getIntent().getBooleanExtra("reservationPlaced", false);
+        Log.d("reservation", "" + reservationPlaced);
+
         shelterName = getIntent().getStringExtra("shelterName");
         setContentView(R.layout.activity_reserve_bed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,6 +49,11 @@ public class ReserveBedActivity extends AppCompatActivity {
         RadioButton Room_four = (RadioButton) findViewById(R.id.RoomFour);
         RadioButton Room_zero = (RadioButton) findViewById(R.id.RoomZero);
 
+        if (reservationPlaced) {
+            errorMsg.setText("You must cancel your previous reservation first");
+        } else {
+            errorMsg.setText("");
+        }
 
         setSupportActionBar(toolbar);
         int userID = getIntent().getIntExtra("userID", 0);
@@ -147,13 +158,20 @@ public class ReserveBedActivity extends AppCompatActivity {
 
         confirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (familyNumber > familyAvailable || apartmentNumber > apartmentAvailable || roomNumber > roomAvailable) {
-                    errorMsg.setText("Enter valid values.");
+                if (familyNumber > familyAvailable || apartmentNumber > apartmentAvailable || roomNumber > roomAvailable || reservationPlaced) {
+                    errorMsg.setText("Enter valid values or cancel previous reservation");
                 } else {
                     familyAvailable = familyAvailable - familyNumber;
                     apartmentAvailable = apartmentAvailable - apartmentNumber;
                     roomAvailable = roomAvailable - roomNumber;
-                    Intent newIntent = new Intent(ReserveBedActivity.this, ShelterDetails.class);
+                    reservationPlaced = true;
+                    Intent newIntent = new Intent(ReserveBedActivity.this, MainActivity.class);
+                    newIntent.putExtra("reservationPlaced", reservationPlaced);
+                    newIntent.putExtra("familyTaken", familyNumber);
+                    newIntent.putExtra("apartmentTaken", apartmentNumber);
+                    newIntent.putExtra("roomTaken", roomNumber);
+                    newIntent.putExtra("shelterReserved", shelterName);
+
                     startActivity(newIntent);
                 }
             }

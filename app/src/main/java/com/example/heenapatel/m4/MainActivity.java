@@ -28,11 +28,39 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static int count = 0;
+
+    public static boolean reservationPlaced;
+
+    public int familyTaken;
+    public int apartmentTaken;
+    public int roomTaken;
+    public String shelterName;
+
     public DataItemRecyclerViewAdapter adapter;
+
+    public int[] capacity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        reservationPlaced = getIntent().getBooleanExtra("reservationPlaced", false);
+        Log.d("reservation", "" + reservationPlaced);
+
+        shelterName = getIntent().getStringExtra("shelterReserved");
+        familyTaken = getIntent().getIntExtra("familyTaken", 0);
+        apartmentTaken = getIntent().getIntExtra("apartmentTaken", 0);
+        roomTaken = getIntent().getIntExtra("roomTaken", 0);
+
+        if (reservationPlaced) {
+            Log.d("reservation", " is true");
+            Log.d("roomcap", "" + roomTaken);
+            Log.d("family", "" + roomTaken);
+            Log.d("apartment", "" + roomTaken);
+
+            SimpleModel.INSTANCE.modifyItems(shelterName, familyTaken, apartmentTaken, roomTaken);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
@@ -94,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 newIntent.putExtra("genderInfo",genderInfo);
                 newIntent.putExtra("shelterNameSearch",shelterNameSearch);
                 newIntent.putExtra("ageGroupIndex",ageGroupIndex);
-
                 startActivity(newIntent);
             }
         });
@@ -106,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetRecycleView(@NonNull RecyclerView recyclerView) {
-        Log.i("frick this", ("" + SimpleModel.INSTANCE.getItems().size()));
         recyclerView.setAdapter(adapter);
     }
 
@@ -119,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         public DataItemRecyclerViewAdapter(List<DataItem> items) {
+            Log.d("testestest","DOES THIS HAPPEN MORE THAN 1NCE");
             mValues = new ArrayList<>();
             String genderInfo = getIntent().getStringExtra("genderInfo");
             String shelterNameSearch = getIntent().getStringExtra("shelterName");
@@ -192,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("Capacity", mValues.get(which).getCapacity());
                             intent.putExtra("Maleok", mValues.get(which).getMaleFriendly());
                             intent.putExtra("Femaleok", mValues.get(which).getFemaleFriendly());
+                            intent.putExtra("reservationPlaced", reservationPlaced);
                             startActivity(intent);
 
                         }
@@ -205,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.homeless_shelter_database);
+            InputStream is = getResources().openRawResource(R.raw.homeless2_shelter_database);
 
             //From here we probably should call a model method and pass the InputStream
             //Wrap it in a BufferedReader so that we get the readLine() method

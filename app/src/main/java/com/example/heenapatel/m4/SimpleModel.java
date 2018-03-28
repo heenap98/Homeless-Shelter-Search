@@ -26,4 +26,20 @@ public class SimpleModel {
         return items;
     }
 
+
+
+    public void modifyItems (String shelterName, int familyAvailable, int apartmentAvailable, int roomAvailable) {
+
+
+        for (int i = 0; i < items.size(); i++) {
+           if (shelterName == items.get(i).getName()) {
+               Log.d("start cap", "" + items.get(i).getCapacity());
+               Log.d("new cap", "" + (familyAvailable + apartmentAvailable + roomAvailable));
+               items.get(i).setCapacity(familyAvailable + apartmentAvailable + roomAvailable);
+               Log.d("changed? cap", "" + items.get(i).getCapacity());
+           }
+       }
+
+    }
+
 }

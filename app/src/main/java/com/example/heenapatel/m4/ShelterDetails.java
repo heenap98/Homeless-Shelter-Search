@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,21 @@ import java.util.List;
 
 public class ShelterDetails extends AppCompatActivity {
 
+
+    public static boolean reservationPlaced;
+    public int familyAvailable;
+    public int apartmentAvailable;
+    public int roomAvailable;
+    public String shelterName;
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        reservationPlaced = getIntent().getBooleanExtra("reservationPlaced", false);
+        Log.d("reservation", "" + reservationPlaced);
+
         setContentView(R.layout.activity_shelterdetails);
         Button reserve = (Button) findViewById(R.id.reserveButton);
         int userID = getIntent().getIntExtra("userID", 0);
@@ -48,6 +61,7 @@ public class ShelterDetails extends AppCompatActivity {
                 Intent newIntent = new Intent(ShelterDetails.this, ReserveBedActivity.class);
                 newIntent.putExtra("shelterName", s);
                 newIntent.putExtra("capacityArray", capacityArray);
+                newIntent.putExtra("reservationPlaced", reservationPlaced);
                 startActivity(newIntent);
             }
         });
