@@ -3,12 +3,19 @@ package com.example.heenapatel.m4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreen extends AppCompatActivity implements Serializable {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
         Button login = (Button)findViewById(R.id.button);
@@ -17,7 +24,9 @@ public class WelcomeScreen extends AppCompatActivity {
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeScreen.this, LoginActivity.class));
+
+                Intent newIntent = new Intent(WelcomeScreen.this, LoginActivity.class);
+                startActivity(newIntent);
             }
         });
 

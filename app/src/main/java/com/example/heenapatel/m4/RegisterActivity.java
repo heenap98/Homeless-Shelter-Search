@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -22,11 +23,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText password;
     private RadioButton user;
     private RadioButton admin;
-    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db = new DatabaseHandler(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Button register = (Button) findViewById(R.id.registerButton);
@@ -51,38 +50,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void registerUser(View v) {
-        int userID = 0; // determined by user_credentials.size() before adding new user, used to keep track of ArrayList positions
         if(name.getText().toString() != ""
                 && username.getText().toString() != ""
                 && password.getText().toString() != "") {
             String[] user = new String[2];
             user[0] = username.getText().toString();
             user[1] = password.getText().toString();
-            userID = Credentials.user_credentials.size();
-            Credentials.user_credentials.add(user);
-            Credentials.reserved_status.add(false);
-            Credentials.reservation_location.add(null);
-            Credentials.num_reservations.add(0);
-            User newUser = new User(userID, user[0], user[1], "");
 
-            db.insertUser(newUser);
+            User newUser = new User(user[0], user[1]);
 
-
-            if (db == null) {
-                Log.d("done", "goofed");
-            } else {
-                Log.d("hmmm", "hmmmm");
-
-//                ArrayList<User> users = (ArrayList<User>) db.getAllUsers();
-//                Log.d("size of user table", "y" + users.size());
-
+            Credentials cred = (Credentials) getApplicationContext();
+            cred.add(newUser);
 
             }
 
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
-        }
-    }
 
+            startActivity(intent);
+    }
 }
