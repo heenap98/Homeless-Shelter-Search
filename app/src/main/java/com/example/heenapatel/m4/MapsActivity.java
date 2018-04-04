@@ -50,6 +50,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        List<DataItem> items = new ArrayList<>();
+        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(items);
+        List<DataItem> filtered = adapter.mValues;
+        for (int i = 0; i < filtered.size(); i++) {
+            LatLng current = new LatLng(filtered.get(i).getLatitude(), filtered.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(current).title(filtered.get(i).getName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
+        }
     }
 
     public class DataItemRecyclerViewAdapter extends RecyclerView.Adapter<MainActivity.DataItemRecyclerViewAdapter.DataItemListViewHolder> {
