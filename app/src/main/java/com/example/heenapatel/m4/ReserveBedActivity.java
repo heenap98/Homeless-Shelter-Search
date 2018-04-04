@@ -26,15 +26,18 @@ public class ReserveBedActivity extends AppCompatActivity {
     public String shelterName;
     public int[] capacityArray;
     SimpleModel shelters = MainActivity.model;
+    public int userID;
 
 
-    public static boolean reservationPlaced;
+    public boolean reservationPlaced;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reservationPlaced = getIntent().getBooleanExtra("reservationPlaced", false);
+        userID = getIntent().getIntExtra("UserID", 9999);
         Log.d("reservation", "" + reservationPlaced);
+        Credentials cred = (Credentials) getApplicationContext();
+        final User user = cred.get(userID);
 
         shelterName = getIntent().getStringExtra("shelterName");
         setContentView(R.layout.activity_reserve_bed);
@@ -51,16 +54,16 @@ public class ReserveBedActivity extends AppCompatActivity {
         RadioButton Room_four = (RadioButton) findViewById(R.id.RoomFour);
         RadioButton Room_zero = (RadioButton) findViewById(R.id.RoomZero);
 
-        if (reservationPlaced) {
+        if (user.hasReservation) {
             errorMsg.setText("You must cancel your previous reservation first");
         } else {
             errorMsg.setText("");
         }
 
         setSupportActionBar(toolbar);
-        int userID = getIntent().getIntExtra("userID", 0);
+        final int userID = getIntent().getIntExtra("userID", 0);
 
-        roomAvailable = 2;
+        roomAvailable = 4;
         familyAvailable = 6;
         apartmentAvailable = 4;
 
@@ -179,13 +182,15 @@ public class ReserveBedActivity extends AppCompatActivity {
                         }
                     }
 
-                    reservationPlaced = true;
+                    user.hasReservation = true;
+                    user.bookedNumber = total;
                     Intent newIntent = new Intent(ReserveBedActivity.this, MainActivity.class);
                     newIntent.putExtra("reservationPlaced", reservationPlaced);
                     newIntent.putExtra("familyTaken", familyNumber);
                     newIntent.putExtra("apartmentTaken", apartmentNumber);
                     newIntent.putExtra("roomTaken", roomNumber);
                     newIntent.putExtra("shelterReserved", shelterName);
+                    newIntent.putExtra("UserID", userID);
 
                     startActivity(newIntent);
                 }

@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             if (current_user[0].equals((cred.get(i).getUsername()))
                     && current_user[1].equals((cred.get(i).getPassword()))) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("UserID", i);
                 startActivity(intent);
             }
         }

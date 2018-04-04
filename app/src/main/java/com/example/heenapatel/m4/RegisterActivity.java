@@ -61,11 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             Credentials cred = (Credentials) getApplicationContext();
             cred.add(newUser);
-
-            }
-
+            int id = cred.size() - 1;
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-
+            intent.putExtra("UserID", id);
             startActivity(intent);
+            }
     }
 }

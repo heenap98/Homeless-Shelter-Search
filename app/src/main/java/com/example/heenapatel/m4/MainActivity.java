@@ -31,14 +31,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static int count = 0;
-
-    public static boolean reservationPlaced;
-
     public int familyTaken;
     public int apartmentTaken;
     public int roomTaken;
     public String shelterName;
     public static SimpleModel model = SimpleModel.INSTANCE;
+    public int userID;
+    public int shelterID;
 
     public DataItemRecyclerViewAdapter adapter;
 
@@ -49,22 +48,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        reservationPlaced = getIntent().getBooleanExtra("reservationPlaced", false);
-        Log.d("reservation", "" + reservationPlaced);
+        userID = getIntent().getIntExtra("UserID", 999999);
+        Log.d("UserID", "" + userID);
 
         shelterName = getIntent().getStringExtra("shelterReserved");
         familyTaken = getIntent().getIntExtra("familyTaken", 0);
         apartmentTaken = getIntent().getIntExtra("apartmentTaken", 0);
         roomTaken = getIntent().getIntExtra("roomTaken", 0);
 
-        if (reservationPlaced) {
-            Log.d("reservation", " is true");
-            Log.d("roomcap", "" + roomTaken);
-            Log.d("family", "" + roomTaken);
-            Log.d("apartment", "" + roomTaken);
 
-            SimpleModel.INSTANCE.modifyItems(shelterName, familyTaken, apartmentTaken, roomTaken);
-        }
+//        if (reservationPlaced) {
+//            Log.d("reservation", " is true");
+//            Log.d("roomcap", "" + roomTaken);
+//            Log.d("family", "" + roomTaken);
+//            Log.d("apartment", "" + roomTaken);
+//
+//            SimpleModel.INSTANCE.modifyItems(shelterName, familyTaken, apartmentTaken, roomTaken);
+//        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button logOut = (Button)findViewById(R.id.logOutButton);
@@ -100,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.getContext().startActivity(new Intent(recyclerView.getContext(), ShelterDetails.class));
+                Intent intent = new Intent(recyclerView.getContext(), ShelterDetails.class);
+                intent.putExtra("UserID", userID);
+                view.getContext().startActivity(intent);
             }
         });
 
@@ -214,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                             for(int i = 0; i < mValues.size(); i++) {
                                 if (mValues.get(i).getName().equalsIgnoreCase(selected)) {
                                     which = i;
-                                    continue;
+                                    break;
                                 }
                             }
                             intent.putExtra("shelterName", mValues.get(which).getName());
@@ -223,7 +225,8 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("Capacity", mValues.get(which).getCapacity());
                             intent.putExtra("Maleok", mValues.get(which).getMaleFriendly());
                             intent.putExtra("Femaleok", mValues.get(which).getFemaleFriendly());
-                            intent.putExtra("reservationPlaced", reservationPlaced);
+                            intent.putExtra("UserID", userID);
+                            intent.putExtra("ShelterID", which);
                             startActivity(intent);
 
                         }
