@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailField;
     private EditText passField;
     private TextView invalidText;
+    //Credentials cred;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,20 +37,29 @@ public class LoginActivity extends AppCompatActivity {
 
     public void logIn(View v) {
 
+        Credentials cred = (Credentials) getIntent().getSerializableExtra("Credentials");
+
+        System.out.println("LOG IN ACTIVITY");
+        for (int i = 0; i < cred.size(); i++) {
+            System.out.println(cred.get(i).getUsername());
+            System.out.println(cred.get(i).getPassword());
+        }
+
         String[] current_user = new String[2];
         current_user[0] = emailField.getText().toString();
         current_user[1] = passField.getText().toString();
-        Credentials cred = (Credentials) getApplicationContext();
+//        Credentials cred = (Credentials) getApplicationContext();
         for (int i = 0; i < cred.size(); i++) {
 
             if (current_user[0].equals((cred.get(i).getUsername()))
                     && current_user[1].equals((cred.get(i).getPassword()))) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("Credentials", cred);
                 intent.putExtra("UserID", i);
                 startActivity(intent);
+            } else if (i == cred.size() - 1) {
+                invalidText.setVisibility(View.VISIBLE);
             }
         }
-
-        invalidText.setVisibility(View.VISIBLE);
     }
 }
