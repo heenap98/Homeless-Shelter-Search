@@ -51,10 +51,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
-        for (int i = 0; i < adapter.mValues.size(); i++) {
-            LatLng current = new LatLng(adapter.mValues.get(i).getLatitude(), adapter.mValues.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(current).title(adapter.mValues.get(i).getName()));
+//        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
+//        DataItemRecyclerViewAdapter adapter = MainActivity.adapter;
+        for (int i = 0; i < MainActivity.adapter.mValues.size(); i++) {
+            LatLng current = new LatLng(MainActivity.adapter.mValues.get(i).getLatitude(), MainActivity.adapter.mValues.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(current).title(MainActivity.adapter.mValues.get(i).getName() + "\n" + MainActivity.adapter.mValues.get(i).getPhone_number()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
         }
     }
@@ -104,7 +105,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         public void onBindViewHolder(MainActivity.DataItemRecyclerViewAdapter.DataItemListViewHolder holder, int position) {
-            holder.name.setText(mValues.get(position).getName());
+            CharSequence details = mValues.get(position).getName() + "\n" + mValues.get(position).getPhone_number();
+            holder.name.setText(details);
         }
 
         @Override

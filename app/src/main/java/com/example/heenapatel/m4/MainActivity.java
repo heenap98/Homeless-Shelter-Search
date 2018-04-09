@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public int shelterID;
     private User user;
 
-    public DataItemRecyclerViewAdapter adapter;
+    public static DataItemRecyclerViewAdapter adapter;
 
     public int[] capacity;
 
@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 newIntent.putExtra("genderInfo",genderInfo);
                 newIntent.putExtra("shelterNameSearch",shelterNameSearch);
                 newIntent.putExtra("ageGroupIndex",ageGroupIndex);
+                //PUT EXTRA ARRAY LIST FROM CURRENT ADAPTER
                 startActivity(newIntent);
             }
         });
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class DataItemRecyclerViewAdapter extends RecyclerView.Adapter<DataItemRecyclerViewAdapter.DataItemListViewHolder> {
 
-        private final List<DataItem> mValues;
+        public final List<DataItem> mValues;
 
 //        public DataItemRecyclerViewAdapter(List<DataItem> items) {
 //            mValues = items;
