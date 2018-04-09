@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static SimpleModel model = SimpleModel.INSTANCE;
     public int userID;
     public int shelterID;
+    private User user;
 
     public DataItemRecyclerViewAdapter adapter;
 
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         userID = getIntent().getIntExtra("UserID", 999999);
         Log.d("UserID", "" + userID);
+        final Credentials obj = (Credentials) getApplicationContext();
 
         shelterName = getIntent().getStringExtra("shelterReserved");
         familyTaken = getIntent().getIntExtra("familyTaken", 0);
@@ -92,6 +95,33 @@ public class MainActivity extends AppCompatActivity {
 
         logOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                //*****************************************************
+                //ATTEMPT AT BINARY SERIALIZATION
+                String filename = "data.data";
+                File file = new File(obj.getApplicationInfo().dataDir, "data.data");
+                Credentials cred = (Credentials) getIntent().getSerializableExtra("Credentials");
+
+                System.out.println("MAIN ACTIVITY");
+                for (int i = 0; i < cred.size(); i++) {
+                    System.out.println(cred.get(i).getUsername());
+                    System.out.println(cred.get(i).getPassword());
+                }
+
+                try {
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+                    // We basically can save our entire data model with one write, since this will follow
+                    // all the links and pointers to save everything.  Just save the top level object.
+                    out.writeObject(cred);
+                    Log.d("success", "in saving");
+                    System.out.println(cred.size());
+                    out.close();
+                } catch (IOException e) {
+                    Log.e("UserManagerFacade", "Error writing an entry from binary file",e);
+                }
+                //*****************************************************
+
+
                 startActivity(new Intent(MainActivity.this, WelcomeScreen.class));
             }
         });
