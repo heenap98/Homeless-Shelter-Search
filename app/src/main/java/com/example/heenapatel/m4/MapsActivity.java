@@ -53,10 +53,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         List<DataItem> items = new ArrayList<>();
         DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(items);
-        List<DataItem> filtered = adapter.mValues;
-        for (int i = 0; i < filtered.size(); i++) {
-            LatLng current = new LatLng(filtered.get(i).getLatitude(), filtered.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(current).title(filtered.get(i).getName()));
+        for (int i = 0; i < adapter.mValues.size(); i++) {
+            LatLng current = new LatLng(adapter.mValues.get(i).getLatitude(), adapter.mValues.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(current).title(adapter.mValues.get(i).getName()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
         }
     }
