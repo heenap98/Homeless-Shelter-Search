@@ -73,8 +73,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String shelterNameSearch = getIntent().getStringExtra("shelterName");
 
             int ageGroupIndex = 0;
-            if (getIntent().getStringExtra("AgeGroup") != null) {
-                ageGroupIndex = Integer.parseInt(getIntent().getStringExtra("AgeGroup"));
+            if (getIntent().getStringExtra("ageGroupIndex") != null) {
+                ageGroupIndex = Integer.parseInt(getIntent().getStringExtra("ageGroupIndex"));
             }
 
             AgeGroup ageGroup = AgeGroup.values()[ageGroupIndex];
