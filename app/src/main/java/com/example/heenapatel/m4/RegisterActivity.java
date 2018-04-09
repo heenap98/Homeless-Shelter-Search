@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d("success", "in saving");
                 out.close();
             } catch (IOException e) {
-                Log.e("UserManagerFacade", "Error writing an entry from binary file",e);
+                Log.e("UserManagerFacade", "Error writing an entry from binary file", e);
             }
             //*****************************************************
 
@@ -97,6 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
             intent.putExtra("UserID", id);
             intent.putExtra("Credentials", cred);
             startActivity(intent);
-            }
+        }
     }
 }
