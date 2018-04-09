@@ -51,8 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        List<DataItem> items = new ArrayList<>();
-        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(items);
+        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
         for (int i = 0; i < adapter.mValues.size(); i++) {
             LatLng current = new LatLng(adapter.mValues.get(i).getLatitude(), adapter.mValues.get(i).getLongitude());
             mMap.addMarker(new MarkerOptions().position(current).title(adapter.mValues.get(i).getName()));
