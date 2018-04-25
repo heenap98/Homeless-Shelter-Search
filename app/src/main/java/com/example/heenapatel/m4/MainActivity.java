@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         final RecyclerView recyclerView = findViewById(R.id.recyclerView);
         adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
 
+        
+
         resetRecycleView(recyclerView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

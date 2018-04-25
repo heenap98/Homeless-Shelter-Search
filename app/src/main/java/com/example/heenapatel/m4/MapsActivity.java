@@ -46,16 +46,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
+<<<<<<< HEAD
 //        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(SimpleModel.INSTANCE.getItems());
 //        DataItemRecyclerViewAdapter adapter = MainActivity.adapter;
         for (int i = 0; i < MainActivity.adapter.mValues.size(); i++) {
             LatLng current = new LatLng(MainActivity.adapter.mValues.get(i).getLatitude(), MainActivity.adapter.mValues.get(i).getLongitude());
             mMap.addMarker(new MarkerOptions().position(current).title(MainActivity.adapter.mValues.get(i).getName() + "\n" + MainActivity.adapter.mValues.get(i).getPhone_number()));
+=======
+        List<DataItem> items = new ArrayList<>();
+        DataItemRecyclerViewAdapter adapter = new DataItemRecyclerViewAdapter(items);
+        System.out.println(adapter.mValues.size());
+        for (int i = 0; i < adapter.mValues.size(); i++) {
+            LatLng current = new LatLng(adapter.mValues.get(i).getLatitude(), adapter.mValues.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(current).title(adapter.mValues.get(i).getName()));
+>>>>>>> Heena
             mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
         }
     }
