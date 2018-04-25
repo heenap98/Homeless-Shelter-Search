@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passField;
     private TextView invalidText;
     //Credentials cred;
+    private int loginCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,8 +57,18 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("Credentials", cred);
                 intent.putExtra("UserID", i);
+                loginCount = 0;
                 startActivity(intent);
             } else if (i == cred.size() - 1) {
+                loginCount++;
+                if (loginCount >= 3) {
+                    //***************************************
+                    //DO EMAIL PASSWORD RECOVERY HERE
+                    //***************************************
+                    System.out.println("Test for log in recovery.");
+                    startActivity(new Intent(LoginActivity.this, EmailPasswordRecovery.class));
+                }
+
                 invalidText.setVisibility(View.VISIBLE);
             }
         }

@@ -52,10 +52,6 @@
             android:label="SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UserManagementFacade"
-            android:label="UserManagementFacade"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ShelterDetails"
             android:label="ShelterDetails"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -63,11 +59,15 @@
             android:name=".ReserveBedActivity"
             android:label="@string/title_activity_reserve_bed"
             android:parentActivityName=".ShelterDetails"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".EmailPasswordRecovery"
+            android:label="EmailPasswordRecovery"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.heenapatel.m4.ShelterDetails" />
-        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
