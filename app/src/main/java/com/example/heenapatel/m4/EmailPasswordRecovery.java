@@ -16,6 +16,7 @@ public class EmailPasswordRecovery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.email_password_recovery);
 
     }
 }
