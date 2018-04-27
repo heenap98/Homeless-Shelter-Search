@@ -16,7 +16,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailField;
     private EditText passField;
     private TextView invalidText;
-    //Credentials cred;
     private int loginCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         invalidText = (TextView)findViewById(R.id.textView);
         Button login = (Button)findViewById(R.id.button4);
         Button cancel = (Button) findViewById(R.id.cancelButton);
+        Credentials cred = (Credentials) getIntent().getSerializableExtra("Credentials");
+
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
@@ -66,7 +67,9 @@ public class LoginActivity extends AppCompatActivity {
                     //DO EMAIL PASSWORD RECOVERY HERE
                     //***************************************
                     System.out.println("Test for log in recovery.");
-                    startActivity(new Intent(LoginActivity.this, EmailPasswordRecovery.class));
+                    Intent newIntent = new Intent(LoginActivity.this, EmailPasswordRecovery.class);
+                    newIntent.putExtra("Credentials", cred);
+                    startActivity(newIntent);
                 }
 
                 invalidText.setVisibility(View.VISIBLE);
