@@ -66,7 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                     //DO EMAIL PASSWORD RECOVERY HERE
                     //***************************************
                     System.out.println("Test for log in recovery.");
-                    startActivity(new Intent(LoginActivity.this, EmailPasswordRecovery.class));
+                    Intent newIntent = new Intent(LoginActivity.this, EmailPasswordRecovery.class);
+                    newIntent.putExtra("Credentials", cred);
+                    startActivity(newIntent);
                 }
 
                 invalidText.setVisibility(View.VISIBLE);
